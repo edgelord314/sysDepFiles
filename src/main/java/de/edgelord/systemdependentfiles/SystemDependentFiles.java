@@ -26,9 +26,9 @@ public class SystemDependentFiles {
     private static final String macOSSearchPhrase = "mac";
     private static final String linuxSearchPhrase = "linux";
     private static final String windowsSearchPhrase = "windows";
-    private static final String macOSUserDirprefix = "/Users/";
-    private static final String linuxUserDirprefix = "/home/";
-    private static final String windowsUserDirprefix = /*TODO: windows stuff*/ "foo/bar";
+    private static final String macOSUserDirPrefix = "/Users/";
+    private static final String linuxUserDirPrefix = "/home/";
+    private static final String windowsUserDirPrefix = /*TODO: windows stuff*/ "foo/bar";
 
     /**
      * This method returns the current user's home directory
@@ -58,9 +58,9 @@ public class SystemDependentFiles {
 
         switch (os) {
 
-            case macOS: return macOSUserDirprefix + user + "/";
-            case linux: return linuxUserDirprefix + user + "/";
-            case windows: return windowsUserDirprefix + user + "/";
+            case macOS: return macOSUserDirPrefix + user + "/";
+            case linux: return linuxUserDirPrefix + user + "/";
+            case windows: return windowsUserDirPrefix + user + "/";
         }
 
         return "lorem/ipsum";

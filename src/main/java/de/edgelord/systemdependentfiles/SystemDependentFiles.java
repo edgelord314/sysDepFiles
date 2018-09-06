@@ -105,15 +105,33 @@ public class SystemDependentFiles {
         return new File("/lorem/ipsum");
     }
 
+    /**
+     * Checks for the os and then returns its type.
+     * On a Windows computer for example, this method would check the os
+     * and would most likely return <code>OS.windows</code>.
+     *
+     * @return the operating system of the computer that is running this
+     */
+    public static OS getOs() {
+        checkOS();
+
+        return os;
+    }
+
     private static void checkOS() {
 
         if (os == null) {
+
             if (System.getProperty("os.name").toLowerCase().contains(macOSSearchPhrase)) {
                 os = OS.macOS;
             } else if (System.getProperty("os.name").toLowerCase().contains(linuxSearchPhrase)) {
                 os = OS.linux;
             } else if (System.getProperty("os.name").toLowerCase().contains(windowsSearchPhrase)) {
                 os = OS.windows;
+            } else {
+                // If the os is none of the three, it is most likely somehting like openSuse or anything like that
+                // for which linux is probably the most similar
+                os = OS.linux;
             }
         }
     }

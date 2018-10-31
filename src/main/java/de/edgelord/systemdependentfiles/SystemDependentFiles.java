@@ -5,20 +5,21 @@ import java.io.File;
 /**
  * This class contains a couple of methods for getting Files or paths
  * depending on the current user and the Operating System.
- *
+ * <p>
  * Tested and working on: <code>macOS</code>
- *
+ * <p>
  * TODO: Windows stuff
  */
 public class SystemDependentFiles {
 
-    public enum OS{
+    public enum OS {
         macOS,
         linux,
         windows
     }
 
-    private SystemDependentFiles() {}
+    private SystemDependentFiles() {
+    }
 
     private static OS os = null;
     private static String user = null;
@@ -28,7 +29,8 @@ public class SystemDependentFiles {
     private static final String windowsSearchPhrase = "windows";
     private static final String macOSUserDirPrefix = "/Users/";
     private static final String linuxUserDirPrefix = "/home/";
-    private static final String windowsUserDirPrefix = /*TODO: windows stuff*/ "foo/bar";
+    private static final String windowsUserDir = System.getProperty("user.home");
+    private static final String windowsSystemPath = "C:/";
 
     /**
      * This method returns the current user's home directory
@@ -58,9 +60,12 @@ public class SystemDependentFiles {
 
         switch (os) {
 
-            case macOS: return macOSUserDirPrefix + user + "/";
-            case linux: return linuxUserDirPrefix + user + "/";
-            case windows: return windowsUserDirPrefix + user + "/";
+            case macOS:
+                return macOSUserDirPrefix + user + "/";
+            case linux:
+                return linuxUserDirPrefix + user + "/";
+            case windows:
+                return windowsUserDir + "/";
         }
 
         return "lorem/ipsum";
@@ -89,7 +94,7 @@ public class SystemDependentFiles {
      *
      * @param relativePath the path relative to the directory below the user's directory.
      * @return the file from the directory below the user's directory that belongs to the given
-     *         relative path
+     * relative path
      */
     public static File getSystemFile(String relativePath) {
 
@@ -97,9 +102,12 @@ public class SystemDependentFiles {
 
         switch (os) {
 
-            case macOS: return new File("/" + relativePath);
-            case linux: return new File("/" + relativePath);
-            case windows: /*TODO: windows stuff*/
+            case macOS:
+                return new File("/" + relativePath);
+            case linux:
+                return new File("/" + relativePath);
+            case windows:
+                return new File(windowsSystemPath + relativePath);
         }
 
         return new File("/lorem/ipsum");
